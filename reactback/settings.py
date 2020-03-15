@@ -135,7 +135,7 @@ SQL_LITE = {
     }
 }
 
-DATABASE_URL = os.environ.get('DATABASE_URL', default=None)
+DATABASE_URL = os.environ.get('HDB', default=None)
 LOCAL_DB_TYPE = os.environ.get('DB_TYPE', default='sqlite')
 
 HEROKU_POSTGRES_DB = {
