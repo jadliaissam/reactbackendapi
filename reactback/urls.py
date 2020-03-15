@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
+    path('init', views.init_data),
     path('api/', include('reactbackapp.urls')),
 ]
 

@@ -35,4 +35,4 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 class OperationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Operation
-        fields = ['id', 'type', 'description', 'quantity', 'operation_product', 'operation_user']
+        fields = ['id', 'type', 'description', 'quantity', 'operation_product', 'operation_user', 'created_at']
