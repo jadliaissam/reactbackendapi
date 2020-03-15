@@ -30,7 +30,7 @@ class Operation(models.Model):
     operation_product = models.ForeignKey(Product, on_delete=models.CASCADE)
     operation_user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=datetime.now, null=True, blank=True)
-    type = models.SmallIntegerField(choices=TYPES,null=True, blank=True, max_length=255)
+    type = models.SmallIntegerField(choices=TYPES,null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
     def __str__(self):
