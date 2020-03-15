@@ -4,10 +4,13 @@ from django.shortcuts import render
 from reactbackapp.models import MyUser, Product, Operation
 import random
 from faker import Faker
+from django.conf import settings
 
 
 def home(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', {
+        'data' : settings.DEBUG
+    })
 
 
 def init_data(request):
