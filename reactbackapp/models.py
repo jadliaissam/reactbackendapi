@@ -10,15 +10,16 @@ TYPES = (
        (2, _('Output')),
    )
 
+
 class MyUser(User):
-    avatar = models.ImageField(null=True, blank=True, upload_to='upload/users')
+    avatar = models.ImageField(null=True, blank=True, upload_to='staticfiles/upload/users')
     token = models.CharField(default=uuid4().hex, max_length=255, blank=True, null=True)
 
 
 class Product(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to='upload/products')
+    image = models.ImageField(null=True, blank=True, upload_to='staticfiles/upload/products')
     created_at = models.DateTimeField(default=datetime.now, null=True, blank=True)
 
     def __str__(self):

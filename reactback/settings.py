@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ix&@anp*y9!*rs4mvd-!rh5kmo-5+@4*d=@^hbc0o(-4!vj##x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.int('DEBUG')
+DEBUG = env.int('DEBUG', default=0)
 
 ALLOWED_HOSTS = ['*']
 
@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'rest_framework',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,15 +127,14 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
+
+STATIC_URL = '/staticfiles/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+WHITENOISE_AUTOREFRESH = True
 
 SQL_LITE = {
     'default': {
@@ -153,3 +153,5 @@ HEROKU_POSTGRES_DB = {
 DATABASES = HEROKU_POSTGRES_DB if DATABASE_URL else SQL_LITE
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+AUTH_API = env.int('AUTH_API', default=0)

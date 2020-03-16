@@ -5,10 +5,17 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
+    avatar_url = serializers.SerializerMethodField(read_only=True)
+    avatar = serializers.ImageField(write_only=True)
+
+    def get_avatar_url(self, obj):
+        absolute = self.context['request'].build_absolute_uri()
+        schema = absolute.split('//')[0][:-1]
+        return "{}://{}/{}".format(schema, self.context['request'].get_host(), obj.avatar.url)
 
     class Meta:
         model = MyUser
-        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'avatar', 'password']
+        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'avatar', 'avatar_url', 'password']
 
     def create(self, validated_data):
         user = super().create(validated_data)
@@ -27,9 +34,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
+    image_url = serializers.SerializerMethodField('get_image')
+
+    def get_image(self, obj):
+        absolute = self.context['request'].build_absolute_uri()
+        schema = absolute.split('//')[0][:-1]
+        return "{}://{}/{}".format(schema, self.context['request'].get_host(), obj.image.url)
+
     class Meta:
         model = Product
-        fields = ['id', 'title', 'description', 'image']
+        fields = ['id', 'title', 'description', 'image_url']
 
 
 class OperationSerializer(serializers.HyperlinkedModelSerializer):
