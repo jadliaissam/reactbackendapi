@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'rest_framework',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -155,3 +157,6 @@ DATABASES = HEROKU_POSTGRES_DB if DATABASE_URL else SQL_LITE
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 AUTH_API = env.int('AUTH_API', default=0)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
