@@ -6,12 +6,12 @@ from rest_framework import serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
     avatar_url = serializers.SerializerMethodField(read_only=True)
-    avatar = serializers.ImageField(write_only=True)
+    avatar = serializers.ImageField(write_only=True, allow_null=True, allow_empty_file=True, required=False)
 
     def get_avatar_url(self, obj):
         absolute = self.context['request'].build_absolute_uri()
         schema = absolute.split('//')[0][:-1]
-        return "{}://{}/{}".format(schema, self.context['request'].get_host(), obj.avatar.url)
+        return "{}://{}/{}".format(schema, self.context['request'].get_host(), obj.avatar.url) if obj.avatar else None
 
     class Meta:
         model = MyUser
