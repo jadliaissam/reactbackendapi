@@ -9,7 +9,7 @@ djangorestframework-simplejwt==4.4.0
 environ==1.0
 Faker==4.0.2
 gunicorn==20.0.4
-Pillow==7.0.0
+Pillow==8.2.0
 psycopg2==2.8.4
 PyJWT==1.7.1
 python-dateutil==2.8.1
